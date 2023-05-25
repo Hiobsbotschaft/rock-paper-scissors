@@ -1,8 +1,9 @@
 let computerwins = 0
 let playerwins = 0
+let counts = 0 
 const choices = ['rock', 'paper', 'scissors'];
-let display = document.getElementById("display");
-let root = document.getElementById("root");
+// let display = document.getElementById("display");
+// let root = document.getElementById("root");
 let b1 = document.createElement("button");
 b1.textContent="Rock";
 b1.id = 'rock';
@@ -20,8 +21,8 @@ root.appendChild(b2);
 root.appendChild(b3);
 
 
-let com = document.getElementById("computewin");
-let hum = document.getElementById ("humanwin");
+// let com = document.getElementById("computewin");
+// let hum = document.getElementById ("humanwin");
 
 
 
@@ -73,9 +74,23 @@ function compareSelection(computerSelectionArg, playerSelectionArg) {
 
 function playRound(playerSelection) {
   const computerSelection = getComputerChoice();
+  counts++;
   display.textContent = compareSelection (computerSelection,playerSelection);
-}
+  if (counts>=5){ 
+    display.textContent = checkWinner();
+    b1.disabled = true;
+    b2.disabled = true;
+    b3.disabled = true;
+    
+    
+    let re = document.createElement("button");
+    re.textContent="Restart?";
+    re.id = 'restart';
+    re.addEventListener("click", () => {location.reload()});
+    restart.appendChild(re);
 
+  }
+}
 
 function checkWinner() {
   if (playerwins > computerwins) {
@@ -88,3 +103,5 @@ function checkWinner() {
     return ('Oh well....a draw !')
   }
 }
+
+
